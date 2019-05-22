@@ -78,7 +78,7 @@ function Signup(props) {
               Gigator
             </Typography>
             <Typography variant="h6" align="center" color="textSecondary" paragraph>
-              Harlan TODO: add some interesting text about what the app does for first time visitors.
+              Consolidate your gig jobs. Track your hours, pay and schedule. Tailor your work to your preferences. Earn benefits for your work. Gigator.
             </Typography>
             <div className={classes.heroButtons}>
               <Grid container spacing={16} justify="center">
@@ -114,7 +114,7 @@ function Signup(props) {
                     <Button size="small" color="primary">
                       View
                     </Button>
-                    <Button size="small" color="primary">
+                    <Button size="small" color="primary" align = "right">
                       Edit
                     </Button>
                   </CardActions>
@@ -127,10 +127,10 @@ function Signup(props) {
       {/* Footer */}
       <footer className={classes.footer}>
         <Typography variant="h6" align="center" gutterBottom>
-          Footer
+          Disclaimer
         </Typography>
         <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
-          Something here to give the footer a purpose!
+          The benefits feature of Gigator is not available currently.
         </Typography>
       </footer>
       {/* End footer */}
