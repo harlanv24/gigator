@@ -93,7 +93,7 @@ function Home(props) {
         </div>
         <div className={classNames(classes.layout, classes.cardGrid)}>
           {/* End hero unit */}
-          <Grid container spacing={40} justify = "center">
+          <Grid container spacing={40} justify = "center" direction = "row" alignItems = "center">
             {cards.map(card => (
               <Grid item key={card} sm={6} md={4} lg={3}>
                 <Card className={classes.card}>
