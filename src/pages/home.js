@@ -75,10 +75,10 @@ function Home(props) {
         <div className={classes.heroUnit}>
           <div className={classes.heroContent}>
             <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
-              Gigator
+              Gig+
             </Typography>
             <Typography variant="h6" align="center" color="textSecondary" paragraph>
-              Consolidate your gig jobs. Track your hours, pay and schedule. Tailor your work to your preferences. Earn benefits for your work. Gigator.
+              Consolidate your gig jobs. Track your hours, pay and schedule. Tailor your work to your preferences. Earn benefits for your work. Gig+.
             </Typography>
             <div className={classes.heroButtons}>
               <Grid container spacing={16} justify="center">
@@ -93,7 +93,7 @@ function Home(props) {
         </div>
         <div className={classNames(classes.layout, classes.cardGrid)}>
           {/* End hero unit */}
-          <Grid container spacing={40}>
+          <Grid container spacing={50}>
             {cards.map(card => (
               <Grid item key={card} sm={6} md={4} lg={3}>
                 <Card className={classes.card}>
