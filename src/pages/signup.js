@@ -12,134 +12,364 @@ import Grid from '@material-ui/core/Grid';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
+import React from "react";
+import { render } from "react-dom";
+import { Formik, Field } from "formik";
+import Yup from "yup";
+import classNames from "classnames";
 
 const styles = theme => ({
-  appBar: {
-    position: 'relative',
-  },
-  icon: {
-    marginRight: theme.spacing.unit * 2,
-  },
-  heroUnit: {
-    backgroundColor: theme.palette.background.paper,
-  },
-  heroContent: {
-    maxWidth: 600,
-    margin: '0 auto',
-    padding: `${theme.spacing.unit * 8}px 0 ${theme.spacing.unit * 6}px`,
-  },
-  heroButtons: {
-    marginTop: theme.spacing.unit * 4,
-  },
-  layout: {
-    width: 'auto',
-    marginLeft: theme.spacing.unit * 3,
-    marginRight: theme.spacing.unit * 3,
-    [theme.breakpoints.up(1100 + theme.spacing.unit * 3 * 2)]: {
-      width: 1100,
-      marginLeft: 'auto',
-      marginRight: 'auto',
+    icon: {
+      marginRight: theme.spacing.unit * 2,
     },
-  },
-  cardGrid: {
-    padding: `${theme.spacing.unit * 8}px 0`,
-    backgroundColor: '#e0e0f6',
-  },
-  card: {
-    height: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  cardMedia: {
-    paddingTop: '56.25%', // 16:9
-  },
-  cardContent: {
-    flexGrow: 1,
-  },
-  footer: {
-    backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing.unit * 6,
-  },
-});
+    heroUnit: {
+      backgroundColor: theme.palette.background.paper,
+    },
+    heroContent: {
+      maxWidth: 600,
+      margin: '0 auto',
+      padding: `${theme.spacing.unit * 8}px 0 ${theme.spacing.unit * 6}px`,
+    },
+    heroButtons: {
+      marginTop: theme.spacing.unit * 4,
+    },
+    layout: {
+      width: 'auto',
+      marginLeft: theme.spacing.unit * 3,
+      marginRight: theme.spacing.unit * 3,
+      [theme.breakpoints.up(1100 + theme.spacing.unit * 3 * 2)]: {
+        width: 1100,
+        marginLeft: 'auto',
+        marginRight: 'auto',
+      },
+    },
+    footer: {
+      backgroundColor: theme.palette.background.paper,
+      padding: theme.spacing.unit * 6,
+    },
+  });
 
-const cards = [1, 2, 3];
+// Input feedback
+const InputFeedback = ({ error }) =>
+  error ? <div className={classNames("input-feedback")}>{error}</div> : null;
 
-function Signup(props) {
-  const { classes } = props;
-
+// Checkbox input
+const Checkbox = ({
+  field: { name, value, onChange, onBlur },
+  form: { errors, touched, setFieldValue },
+  id,
+  label,
+  className,
+  ...props
+}) => {
   return (
-    <React.Fragment>
-      <CssBaseline />
-      <main>
-        {/* Hero unit */}
-        <div className={classes.heroUnit}>
-          <div className={classes.heroContent}>
-            <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
-              Gigator
-            </Typography>
-            <Typography variant="h6" align="center" color="textSecondary" paragraph>
-              Consolidate your gig jobs. Track your hours, pay and schedule. Tailor your work to your preferences. Earn benefits for your work. Gigator.
-            </Typography>
-            <div className={classes.heroButtons}>
-              <Grid container spacing={16} justify="center">
-                <Grid item>
-                  <Button variant="contained" color="primary">
-                    Sign Up Now
-                  </Button>
-                </Grid>
-              </Grid>
-            </div>
-          </div>
-        </div>
-        <div className={classNames(classes.layout, classes.cardGrid)}>
-          {/* End hero unit */}
-          <Grid container spacing={40}>
-            {cards.map(card => (
-              <Grid item key={card} sm={6} md={4} lg={3}>
-                <Card className={classes.card}>
-                  <CardMedia
-                    className={classes.cardMedia}
-                    image="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22288%22%20height%3D%22225%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20288%20225%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_164edaf95ee%20text%20%7B%20fill%3A%23eceeef%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A14pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_164edaf95ee%22%3E%3Crect%20width%3D%22288%22%20height%3D%22225%22%20fill%3D%22%2355595c%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%2296.32500076293945%22%20y%3D%22118.8%22%3EThumbnail%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" // eslint-disable-line max-len
-                    title="Image title"
-                  />
-                  <CardContent className={classes.cardContent}>
-                    <Typography gutterBottom variant="h5" component="h2" align = "center">
-                    Track Hours
-                    </Typography>
-                    <Typography align = "center">
-                      This is a media card. You can use this section to describe the content.
-                    </Typography>
-                  </CardContent>
-                  <CardActions>
-                    <Button size="small" color="primary">
-                      View
-                    </Button>
-                    <Button size="small" color="primary" align = "right">
-                      Edit
-                    </Button>
-                  </CardActions>
-                </Card>
-              </Grid>
-            ))}
-          </Grid>
-        </div>
-      </main>
-      {/* Footer */}
-      <footer className={classes.footer}>
-        <Typography variant="h6" align="center" gutterBottom>
-          Disclaimer
-        </Typography>
-        <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
-          The benefits feature of Gigator is not available currently.
-        </Typography>
-      </footer>
-      {/* End footer */}
-    </React.Fragment>
+    <div>
+      <input
+        name={name}
+        id={id}
+        type="checkbox"
+        value={value}
+        checked={value}
+        onChange={onChange}
+        onBlur={onBlur}
+        className={classNames("radio-button")}
+      />
+      <label htmlFor={id}>{label}</label>
+      {touched[name] && <InputFeedback error={errors[name]} />}
+    </div>
   );
-}
-
-Signup.propTypes = {
-  classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(Signup);
+// Checkbox group
+class CheckboxGroup extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  handleChange = event => {
+    const target = event.currentTarget;
+    let valueArray = [...this.props.value] || [];
+
+    if (target.checked) {
+      valueArray.push(target.id);
+    } else {
+      valueArray.splice(valueArray.indexOf(target.id), 1);
+    }
+
+    this.props.onChange(this.props.id, valueArray);
+  };
+
+  handleBlur = () => {
+    // take care of touched
+    this.props.onBlur(this.props.id, true);
+  };
+
+  render() {
+    const { value, error, touched, label, className, children } = this.props;
+
+    const classes = classNames(
+      "input-field",
+      {
+        "is-success": value || (!error && touched), // handle prefilled or user-filled
+        "is-error": !!error && touched
+      },
+      className
+    );
+
+    return (
+      <div className={classes}>
+        <fieldset>
+          <legend>{label}</legend>
+          {React.Children.map(children, child => {
+            return React.cloneElement(child, {
+              field: {
+                value: value.includes(child.props.id),
+                onChange: this.handleChange,
+                onBlur: this.handleBlur
+              }
+            });
+          })}
+          {touched && <InputFeedback error={error} />}
+        </fieldset>
+      </div>
+    );
+  }
+}
+
+// Radio input
+const RadioButton = ({
+  field: { name, value, onChange, onBlur },
+  id,
+  label,
+  className,
+  ...props
+}) => {
+  return (
+    <div>
+      <input
+        name={name}
+        id={id}
+        type="radio"
+        value={id} // could be something else for output?
+        checked={id === value}
+        onChange={onChange}
+        onBlur={onBlur}
+        className={classNames("radio-button")}
+        {...props}
+      />
+      <label htmlFor={id}>{label}</label>
+    </div>
+  );
+};
+
+// Radio group
+const RadioButtonGroup = ({
+  value,
+  error,
+  touched,
+  id,
+  label,
+  className,
+  children
+}) => {
+  const classes = classNames(
+    "input-field",
+    {
+      "is-success": value || (!error && touched), // handle prefilled or user-filled
+      "is-error": !!error && touched
+    },
+    className
+  );
+
+  return (
+    <div className={classes}>
+      <fieldset>
+        <legend>{label}</legend>
+        {children}
+        {touched && <InputFeedback error={error} />}
+      </fieldset>
+    </div>
+  );
+};
+
+const App = () => (
+  <div className="app">
+    <Typography variant="h6" align="center" color="textSecondary" paragraph>
+    Please enter some information below to see how the app works and begin building your profile.
+    </Typography>
+    <Formik
+      initialValues={{
+        radioGroup: "",
+        checkboxGroup: [],
+        singleCheckbox: false,
+
+      }}
+      validationSchema={Yup.object().shape({
+        radioGroup: Yup.string().required("An option is required"),
+        checkboxGroup: Yup.array().required(
+          "At least one checkbox is required"
+        ),
+        singleCheckbox: Yup.bool().oneOf([true], "Must agree to something"),
+
+      })}
+      onSubmit={(values, actions) => {
+        setTimeout(() => {
+          console.log(JSON.stringify(values, null, 2));
+          actions.setSubmitting(false);
+        }, 500);
+      }}
+      render={({
+        handleSubmit,
+        setFieldValue,
+        setFieldTouched,
+        values,
+        errors,
+        touched,
+        isSubmitting
+      }) => (
+        <form nameonSubmit={handleSubmit}>
+          <Typography gutterBottom variant="h5" component="h2" align = "center">
+          Job List
+          </Typography>
+          <Typography align = "center">
+          Which gig jobs are you currently employed at?
+          </Typography>
+          <CheckboxGroup
+            id="checkboxGroup"
+            label='Select as many as needed. If none of your jobs are listed, please select "Other"'
+            value={values.checkboxGroup}
+            error={errors.checkboxGroup}
+            touched={touched.checkboxGroup}
+            onChange={setFieldValue}
+            onBlur={setFieldTouched}
+          >
+            <Field
+              component={Checkbox}
+              name="checkboxGroup"
+              id="uber"
+              label="Uber"
+            />
+            <Field
+              component={Checkbox}
+              name="checkboxGroup"
+              id="lyft"
+              label="Lyft"
+            />
+            <Field
+              component={Checkbox}
+              name="checkboxGroup"
+              id="flex"
+              label="Amazon Flex"
+            />
+            <Field
+              component={Checkbox}
+              name="checkboxGroup"
+              id="ddash"
+              label="DoorDash"
+            />
+            <Field
+              component={Checkbox}
+              name="checkboxGroup"
+              id="ghub"
+              label="GrubHub"
+            />
+            <Field
+              component={Checkbox}
+              name="checkboxGroup"
+              id="ueats"
+              label="UberEats"
+            />
+            <Field
+              component={Checkbox}
+              name="checkboxGroup"
+              id="pmates"
+              label="Postmates"
+            />
+            <Field
+              component={Checkbox}
+              name="checkboxGroup"
+              id="other"
+              label="Other"
+            />
+          </CheckboxGroup>
+          <Typography gutterBottom variant="h5" component="h2" align = "center">
+          Employment Status
+          </Typography>
+          <Typography align = "center">
+          Which option best describes you?
+          </Typography>
+          <RadioButtonGroup
+            id="radioGroup"
+            label="Describe what purpose gig jobs serve for you. Please select one option"
+            value={values.radioGroup}
+            error={errors.radioGroup}
+            touched={touched.radioGroup}
+          >
+            <Field
+              component={RadioButton}
+              name="radioGroup"
+              id="full"
+              label="They are my main source of income"
+            />
+            <Field
+              component={RadioButton}
+              name="radioGroup"
+              id="part"
+              label="They make me extra money on the side"
+            />
+          </RadioButtonGroup>
+
+          <Typography gutterBottom variant="h5" component="h2" align = "center">
+          Job List
+          </Typography>
+          <p></p>
+          <CheckboxGroup
+            id="checkboxGroup"
+            label='Select as many as needed. If none of your vehicles are listed, please select "Other"'
+            value={values.checkboxGroup}
+            error={errors.checkboxGroup}
+            touched={touched.checkboxGroup}
+            onChange={setFieldValue}
+            onBlur={setFieldTouched}
+          >
+            <Field
+              component={Checkbox}
+              name="checkboxGroup"
+              id="car"
+              label="Car"
+            />
+            <Field
+              component={Checkbox}
+              name="checkboxGroup"
+              id="bike"
+              label="Bike"
+            />
+            <Field
+              component={Checkbox}
+              name="checkboxGroup"
+              id="scoot"
+              label="Scooter"
+            />
+            <Field
+              component={Checkbox}
+              name="checkboxGroup"
+              id="moto"
+              label="Motorcycle"
+            />
+            <Field
+              component={Checkbox}
+              name="checkboxGroup"
+              id="other"
+              label="Other"
+            />
+          </CheckboxGroup>
+          <button type="submit" disabled={isSubmitting}>
+            Submit
+          </button>
+        </form>
+      )}
+    />
+  </div>
+);
+
+render(<App />, document.getElementById("root"));
