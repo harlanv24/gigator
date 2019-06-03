@@ -61,7 +61,7 @@ const styles = theme => ({
   },
 });
 
-const cards = [1, 2, 3];
+
 
 function Home(props) {
   const { classes } = props;
