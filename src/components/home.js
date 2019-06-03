@@ -94,7 +94,7 @@ function Home(props) {
           {/* End hero unit */}
           <Grid container spacing={40} justify = "center" alignItems = "center">
             {cards.map(card => (
-              <Grid item key={card} sm={6} md={5} lg={3}>
+              <Grid item key={card} sm={6} md={8} lg={3}>
                 <Card className={classes.card}>
                   <CardMedia
                     className={classes.cardMedia}
